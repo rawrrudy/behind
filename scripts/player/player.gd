@@ -1,34 +1,52 @@
 extends CharacterBody3D
+
+var can_move := false
 var door_opened := false
 
 @export var speed := 3.5
 @export var mouse_sensitivity := 0.002
 
 @onready var head: Node3D = $Head
+@onready var doorbell_sound: AudioStreamPlayer = get_tree().current_scene.get_node("Doorbell Sound")
+@onready var black_screen: ColorRect = $"Wake Screen/Black Screen"
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var snoring_sound: AudioStreamPlayer = get_tree().current_scene.get_node("Snoring Sound")
 
 const GRAVITY := 9.8
 
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	snoring_sound.play()
+	
+	await get_tree().create_timer(4.0).timeout
+	
+	doorbell_sound.play()
+	
+	await get_tree().create_timer(4.0).timeout
+	
+	await get_tree().create_timer(1.5).timeout
+	
+	black_screen.visible = false
+	animation_player.play("Wake Up")
 
 
 func _unhandled_input(event):
+	if not can_move:
+		return
+		
 	if event is InputEventMouseMotion:
-		# Look left/right
 		rotate_y(-event.relative.x * mouse_sensitivity)
-
-		# Look up/down
+		
 		head.rotate_x(-event.relative.y * mouse_sensitivity)
-
-		# Prevent the camera from flipping upside down
+		
 		head.rotation.x = clamp(
 			head.rotation.x,
 			deg_to_rad(-89),
 			deg_to_rad(89)
 		)
-
-	# Press ESC to release the mouse
+			
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
@@ -38,11 +56,17 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	_update_interaction_prompt()
-	# Gravity
+	
+	if not can_move:
+		velocity.x = 0
+		velocity.y = 0
+		move_and_slide()
+		return
+	
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 
-	# WASD input
+	
 	var input := Input.get_vector(
 		"move_left",
 		"move_right",
@@ -50,7 +74,7 @@ func _physics_process(delta):
 		"move_backward"
 	)
 
-	# Convert keyboard input into world movement
+	
 	var direction := (
 		transform.basis *
 		Vector3(input.x, 0, input.y)
@@ -98,3 +122,8 @@ func _update_interaction_prompt():
 		
 		if interactable.has_method("get_interaction_text"):
 			prompt.text = interactable.get_interaction_text()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Wake Up":
+		can_move = true

@@ -33,29 +33,6 @@ func _process(delta):
 		rotation.y = target_rotation
 		is_moving = false
 
-		if is_open:
-			_door_opened()
-
-
-func _door_opened():
-	var player = get_tree().get_first_node_in_group("player")
-
-	if player == null:
-		return
-		
-	player.door_opened = true
-
-	var objective_ui = player.get_node("Objective UI")
-	var door_reached_text = objective_ui.get_node("Door Reached Text")
-
-	door_reached_text.text = "..."
-	door_reached_text.visible = true
-
-	await get_tree().create_timer(2.0).timeout
-
-	door_reached_text.text = "Hmmm... No one's at the door. Go back to your bedroom."
-	door_reached_text.visible = true
-
 
 func get_interaction_text() -> String:
 	if is_open:

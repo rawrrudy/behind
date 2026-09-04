@@ -13,8 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://brfyve5aoksqi" path="res://assets/materials/sofa.png" id="6_kb4dp"]
 [ext_resource type="Script" uid="uid://celkqumhvwj37" path="res://scripts/systems/bedroom_trigger.gd" id="7_23d8w"]
 [ext_resource type="Texture2D" uid="uid://dvwj68pl7uyef" path="res://assets/materials/kitchen.jpg" id="8_jpx4l"]
+[ext_resource type="Script" uid="uid://cfw2w0tvt7yto" path="res://scenes/living_room_door_pivot.gd" id="8_liark"]
 [ext_resource type="Script" uid="uid://dg6pewo7w3rj6" path="res://scripts/objects/kitchen_door_pivot.gd" id="9_qd5op"]
 [ext_resource type="Texture2D" uid="uid://c1r0yok07c4u0" path="res://assets/materials/fridge.jpg" id="10_mmwvo"]
+[ext_resource type="AudioStream" uid="uid://dwrgf8fowr5y1" path="res://assets/audio/doorbell.mp3" id="16_tfcg1"]
+[ext_resource type="AudioStream" uid="uid://pbhxil3wk8xj" path="res://assets/audio/snoring.mp3" id="17_4isv1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpx4l"]
 albedo_texture = ExtResource("3_7lhm0")
@@ -212,10 +215,9 @@ size = Vector3(0.2, 3, 0.45474243)
 material = ExtResource("1_2mva0")
 
 [node name="Hallway Ceiling" type="CSGBox3D" parent="Geometry" unique_id=1561802429]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032446146, 3, -2.453949)
 use_collision = true
-size = Vector3(3.2, 0.2, 8)
+size = Vector3(12.046338, 0.2, 13.122498)
 
 [node name="Bedroom Wall Left" type="CSGBox3D" parent="Geometry" unique_id=612833760]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3063722, 1.5, -4)
@@ -379,7 +381,6 @@ material = ExtResource("1_2mva0")
 
 [node name="Living Room Ceiling" type="CSGBox3D" parent="Geometry" unique_id=1576406319]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 6.574)
-visible = false
 use_collision = true
 size = Vector3(12, 0.2, 4.9433594)
 
@@ -553,7 +554,7 @@ material = SubResource("StandardMaterial3D_akgmd")
 
 [node name="Living Room Door Pivot" type="Node3D" parent="Geometry" unique_id=1232605266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5386259, 0, 4.1483817)
-script = ExtResource("2_6by82")
+script = ExtResource("8_liark")
 
 [node name="Front Door" type="CSGBox3D" parent="Geometry/Living Room Door Pivot" unique_id=1965662319]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4935779, 1.1, -0.25958633)
@@ -619,13 +620,12 @@ size = Vector3(2, 2.5, 1)
 material = SubResource("StandardMaterial3D_ur5vc")
 
 [node name="Player" parent="." unique_id=1831374663 instance=ExtResource("1_pfxeq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6.5)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1, -6.5)
 
 [node name="Lights" type="Node3D" parent="." unique_id=896052651]
 
 [node name="Hallway Light 1" type="OmniLight3D" parent="Lights" unique_id=1732856325]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, -2.5)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.854, 2.7, 0)
 light_color = Color(0.72156864, 0.76862746, 0.84705883, 1)
 light_energy = 1.5
 omni_range = 4.0
@@ -637,27 +637,26 @@ light_energy = 1.5
 omni_range = 4.0
 
 [node name="Hallway Light 3" type="OmniLight3D" parent="Lights" unique_id=866818713]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 2.5)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.854, 2.7, 0)
 light_color = Color(0.72156864, 0.76862746, 0.84705883, 1)
-light_energy = 1.5
 omni_range = 4.0
 
 [node name="Living Room Light" type="OmniLight3D" parent="Lights" unique_id=339260801]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 2.7, 6.5)
-light_energy = 1.5
+light_energy = 0.85
+omni_range = 4.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1218145028]
 environment = SubResource("Environment_b8xij")
 
 [node name="Room Ambience" type="AudioStreamPlayer2D" parent="." unique_id=1223803977]
 stream = ExtResource("3_tfxtf")
-volume_db = -10.0
+volume_db = -6.0
 autoplay = true
 
 [node name="Electrical Hum" type="AudioStreamPlayer" parent="." unique_id=416387656]
 stream = ExtResource("4_gvrt1")
-volume_db = -24.0
+volume_db = -20.0
 autoplay = true
 
 [node name="Front Door Trigger" type="Area3D" parent="." unique_id=1731444382]
@@ -672,5 +671,13 @@ shape = SubResource("BoxShape3D_b8xij")
 script = ExtResource("7_23d8w")
 
 [node name="Bedroom Trigger Shape" type="CollisionShape3D" parent="Bedroom Trigger" unique_id=1957795150]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6.3416634)
 shape = SubResource("BoxShape3D_ktosd")
+
+[node name="Doorbell Sound" type="AudioStreamPlayer" parent="." unique_id=1800717629]
+stream = ExtResource("16_tfcg1")
+volume_db = -3.0
+
+[node name="Snoring Sound" type="AudioStreamPlayer" parent="." unique_id=2147033933]
+stream = ExtResource("17_4isv1")
+volume_db = -1.0
