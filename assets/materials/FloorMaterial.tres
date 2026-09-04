@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://j01xhq2lurps"]
+
+[ext_resource type="Texture2D" uid="uid://dmhp33ah6gjs6" path="res://assets/materials/floor.svg" id="1_jxut1"]
+
+[resource]
+albedo_texture = ExtResource("1_jxut1")
+metallic = 0.5
+roughness = 0.65
+uv1_scale = Vector3(5, 5, 5)
