@@ -11,6 +11,7 @@ var door_opened := false
 @onready var black_screen: ColorRect = $"Wake Screen/Black Screen"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var snoring_sound: AudioStreamPlayer = get_tree().current_scene.get_node("Snoring Sound")
+@onready var act_text: Label = $"Wake Screen/Act Text"
 
 const GRAVITY := 9.8
 
@@ -18,7 +19,11 @@ const GRAVITY := 9.8
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	act_text.visible = true
 	snoring_sound.play()
+	
+	await get_tree().create_timer(3.0).timeout
+	act_text.visible = false
 	
 	await get_tree().create_timer(4.0).timeout
 	

@@ -114,4 +114,12 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="Act Text" type="Label" parent="Wake Screen" unique_id=637278783]
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_font_sizes/font_size = 64
+text = "ACT: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

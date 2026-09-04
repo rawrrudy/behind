@@ -146,6 +146,7 @@ ambient_light_color = Color(0.3764706, 0.3764706, 0.4392157, 1)
 ambient_light_energy = 0.15
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b8xij"]
+size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ktosd"]
 size = Vector3(2, 2, 2)
