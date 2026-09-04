@@ -1,0 +1,461 @@
+[gd_scene format=3 uid="uid://uijcm8qkpgk8"]
+
+[ext_resource type="Script" uid="uid://u60nnjwxuw3k" path="res://scripts/objects/bedroom_door_pivot.gd" id="1_44656"]
+[ext_resource type="PackedScene" uid="uid://c8qijq6v3gw7s" path="res://scenes/player/player.tscn" id="1_pfxeq"]
+[ext_resource type="Script" uid="uid://b07x88aw2ufr3" path="res://scripts/objects/front_door_pivot.gd" id="2_6by82"]
+[ext_resource type="AudioStream" uid="uid://cbsely0p871dn" path="res://assets/audio/room_ambience.mp3" id="3_tfxtf"]
+[ext_resource type="AudioStream" uid="uid://dco4mgrmyn75t" path="res://assets/audio/electrical_hum.mp3" id="4_gvrt1"]
+[ext_resource type="Script" uid="uid://cuy3itq1oq000" path="res://scripts/systems/front_door_trigger.gd" id="6_c34uo"]
+[ext_resource type="Script" uid="uid://celkqumhvwj37" path="res://scripts/systems/bedroom_trigger.gd" id="7_23d8w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvt6h"]
+albedo_color = Color(0.36078432, 0.2509804, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akgmd"]
+albedo_color = Color(0.70980394, 0.6509804, 0.25882354, 1)
+metallic = 0.5
+roughness = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r76ou"]
+albedo_color = Color(0.08235294, 0.08235294, 0.101960786, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvrt1"]
+albedo_color = Color(0.019607844, 0.019607844, 0.019607844, 1)
+metallic = 0.15
+roughness = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8xij"]
+albedo_color = Color(0.14117648, 0.14117648, 0.16470589, 1)
+roughness = 0.95
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktosd"]
+albedo_color = Color(0.1882353, 0.1882353, 0.21176471, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukud8"]
+albedo_color = Color(0.1882353, 0.1882353, 0.21176471, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6by82"]
+albedo_color = Color(0.15686275, 0.15686275, 0.18039216, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2he0n"]
+albedo_color = Color(0.36078432, 0.2509804, 0.2, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdc4j"]
+albedo_color = Color(0.72156864, 0.72156864, 0.6901961, 1)
+
+[sub_resource type="Environment" id="Environment_b8xij"]
+background_mode = 1
+background_color = Color(0.03137255, 0.039215688, 0.0627451, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3764706, 0.3764706, 0.4392157, 1)
+ambient_light_energy = 0.15
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b8xij"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ktosd"]
+size = Vector3(2, 2, 2)
+
+[node name="Apartment" type="Node2D" unique_id=1627622918]
+
+[node name="Geometry" type="Node3D" parent="." unique_id=2014285017]
+
+[node name="Floor" type="CSGBox3D" parent="Geometry" unique_id=2069689370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(12, 0.2, 18)
+
+[node name="Back wall" type="CSGBox3D" parent="Geometry" unique_id=1681454915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -9)
+use_collision = true
+size = Vector3(12, 3, 0.2)
+
+[node name="Front wall" type="CSGBox3D" parent="Geometry" unique_id=222671510]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3863587, 1.5, 9)
+use_collision = true
+size = Vector3(5.2272825, 3, 0.2)
+
+[node name="Front wall2" type="CSGBox3D" parent="Geometry" unique_id=1370790398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1489015, 1.5, 9)
+use_collision = true
+size = Vector3(5.702197, 3, 0.2)
+
+[node name="Left Wall" type="CSGBox3D" parent="Geometry" unique_id=777888101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.5, 0)
+use_collision = true
+size = Vector3(0.2, 3, 18)
+
+[node name="Right Wall" type="CSGBox3D" parent="Geometry" unique_id=285462879]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.5, 0)
+use_collision = true
+size = Vector3(0.2, 3, 18)
+
+[node name="Hallway Left Wall" type="CSGBox3D" parent="Geometry" unique_id=572015634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 1.5, 0)
+use_collision = true
+size = Vector3(0.2, 3, 8)
+
+[node name="Hallway Right Wall" type="CSGBox3D" parent="Geometry" unique_id=682964024]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 1.5, 0)
+use_collision = true
+size = Vector3(0.2, 3, 8)
+
+[node name="Hallway Ceiling" type="CSGBox3D" parent="Geometry" unique_id=1561802429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+use_collision = true
+size = Vector3(3.2, 0.2, 8)
+
+[node name="Bedroom Wall Left" type="CSGBox3D" parent="Geometry" unique_id=612833760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3063722, 1.5, -4)
+use_collision = true
+size = Vector3(5.4957275, 3, 0.2)
+
+[node name="Bedroom Wall Right" type="CSGBox3D" parent="Geometry" unique_id=1137168022]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.307202, 1.5, -4)
+use_collision = true
+size = Vector3(5.4855957, 3, 0.2)
+
+[node name="Bedroom Doorway Top" type="CSGBox3D" parent="Geometry" unique_id=449873009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, -4)
+use_collision = true
+size = Vector3(1.2, 0.8, 0.2)
+
+[node name="Bed" type="CSGBox3D" parent="Geometry" unique_id=1208612651]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325, -8)
+use_collision = true
+size = Vector3(1.8, 0.45, 2)
+
+[node name="Mattress" type="CSGBox3D" parent="Geometry/Bed" unique_id=940671019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3758523, 0)
+size = Vector3(1.75, 0.3, 1.95)
+
+[node name="Bedside Table" type="CSGBox3D" parent="Geometry" unique_id=857110143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.35, -8.6)
+size = Vector3(0.6, 0.7, 0.6)
+
+[node name="Lamp Base" type="CSGBox3D" parent="Geometry/Bedside Table" unique_id=441283045]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39, 0)
+size = Vector3(0.25, 0.08, 0.25)
+
+[node name="Lamp Stem" type="CSGCylinder3D" parent="Geometry/Bedside Table" unique_id=1267746574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64, 0)
+radius = 0.05
+height = 0.45
+
+[node name="Lamp Shade" type="CSGCylinder3D" parent="Geometry/Bedside Table" unique_id=500612257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99, 0)
+radius = 0.25
+height = 0.25
+cone = true
+
+[node name="Lamp Light" type="OmniLight3D" parent="Geometry/Bedside Table" unique_id=326946313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+light_color = Color(0.72156864, 0.76862746, 0.84705883, 1)
+light_energy = 0.5
+omni_range = 4.0
+
+[node name="Bedside Table 2" type="CSGBox3D" parent="Geometry" unique_id=1006764929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.35, -8.6)
+size = Vector3(0.6, 0.7, 0.6)
+
+[node name="Lamp Base" type="CSGBox3D" parent="Geometry/Bedside Table 2" unique_id=1634629683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39, 0)
+size = Vector3(0.25, 0.08, 0.25)
+
+[node name="Lamp Stem" type="CSGCylinder3D" parent="Geometry/Bedside Table 2" unique_id=181572127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64, 0)
+radius = 0.05
+height = 0.45
+
+[node name="Lamp Shade" type="CSGCylinder3D" parent="Geometry/Bedside Table 2" unique_id=803493802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99, 0)
+radius = 0.25
+height = 0.25
+cone = true
+
+[node name="Lamp Light" type="OmniLight3D" parent="Geometry/Bedside Table 2" unique_id=2103399017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+light_color = Color(0.72156864, 0.76862746, 0.84705883, 1)
+light_energy = 0.5
+omni_range = 4.0
+
+[node name="Bedroom Window Frame" type="CSGBox3D" parent="Geometry" unique_id=1942041105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.7, -8.9)
+operation = 2
+size = Vector3(2.2, 1.5, 0.15)
+
+[node name="Bedroom Window Glass" type="CSGBox3D" parent="Geometry/Bedroom Window Frame" unique_id=1367628418]
+size = Vector3(2, 1.3, 0.05)
+
+[node name="Bedroom Door Pivot" type="Node3D" parent="Geometry" unique_id=1176315804]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 0, -4)
+script = ExtResource("1_44656")
+
+[node name="Bedroom Door" type="CSGBox3D" parent="Geometry/Bedroom Door Pivot" unique_id=63936462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 1.1, 0)
+use_collision = true
+size = Vector3(1.1, 2.2, 0.12)
+material = SubResource("StandardMaterial3D_pvt6h")
+
+[node name="Front Door Handle2" type="CSGCylinder3D" parent="Geometry/Bedroom Door Pivot/Bedroom Door" unique_id=1861224130]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.3636783, 0.14999998, -0.11148214)
+radius = 0.07
+height = 0.12
+material = SubResource("StandardMaterial3D_akgmd")
+
+[node name="Clock" type="CSGBox3D" parent="Geometry" unique_id=914495507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.8, -8.85)
+size = Vector3(0.8, 0.5, 0.12)
+material = SubResource("StandardMaterial3D_r76ou")
+
+[node name="Clock Display" type="Label3D" parent="Geometry/Clock" unique_id=406827179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.06780052)
+modulate = Color(1, 0.7058824, 0.41568628, 1)
+outline_modulate = Color(1, 0, 0, 1)
+text = "3:00 AM"
+
+[node name="Living Room Wall Left" type="CSGBox3D" parent="Geometry" unique_id=1958082445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18, 1.474, 3.9)
+use_collision = true
+size = Vector3(5.291992, 3, 0.2)
+
+[node name="Living Room Wall Right" type="CSGBox3D" parent="Geometry" unique_id=1343970779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.260241, 1.5, 3.9)
+use_collision = true
+size = Vector3(5.478943, 3, 0.2)
+
+[node name="Living Room Doorway Top" type="CSGBox3D" parent="Geometry" unique_id=179323075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 3.8980842)
+use_collision = true
+size = Vector3(1.2, 0.8, 0.2)
+
+[node name="Living Room Doorway Top2" type="CSGBox3D" parent="Geometry" unique_id=2115824655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.272, 2.6, 9)
+use_collision = true
+size = Vector3(1.4317749, 0.8, 0.2)
+
+[node name="Living Room Floor" type="CSGBox3D" parent="Geometry" unique_id=1916375213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 6.5742188)
+use_collision = true
+size = Vector3(12, 0.2, 4.9433594)
+
+[node name="Living Room Ceiling" type="CSGBox3D" parent="Geometry" unique_id=1576406319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 6.574)
+use_collision = true
+size = Vector3(12, 0.2, 4.9433594)
+
+[node name="Sofa Set" type="CSGBox3D" parent="Geometry" unique_id=1845756717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9014783, 0.25825423, 8.346972)
+use_collision = true
+size = Vector3(3, 0.45, 1)
+
+[node name="Sofa Back" type="CSGBox3D" parent="Geometry" unique_id=148224015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.919148, 0.90825427, 8.73021)
+use_collision = true
+size = Vector3(2.500061, 1.2, 0.25)
+
+[node name="Sofa Arm Left" type="CSGBox3D" parent="Geometry" unique_id=772384653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5264783, 0.60825425, 8.358212)
+use_collision = true
+size = Vector3(0.25, 0.8, 1)
+
+[node name="Sofa Arm Right" type="CSGBox3D" parent="Geometry" unique_id=1564938849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2764783, 0.60825425, 8.358)
+use_collision = true
+size = Vector3(0.25, 0.8, 1)
+
+[node name="Coffee Table" type="CSGBox3D" parent="Geometry" unique_id=1513337464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9014783, 0.75, 7)
+use_collision = true
+size = Vector3(1.6, 0.15, 0.9)
+
+[node name="Coffee Table Leg FL" type="CSGBox3D" parent="Geometry" unique_id=256626973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2514782, 0.4, 7.35)
+use_collision = true
+size = Vector3(0.12, 0.7, 0.12)
+
+[node name="Coffee Table Leg BL" type="CSGBox3D" parent="Geometry" unique_id=1939633320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2514782, 0.4, 6.65)
+use_collision = true
+size = Vector3(0.12, 0.7, 0.12)
+
+[node name="Coffee Table Leg BR" type="CSGBox3D" parent="Geometry" unique_id=1608960232]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5514784, 0.4, 6.65)
+use_collision = true
+size = Vector3(0.12, 0.7, 0.12)
+
+[node name="Coffee Table Leg FR" type="CSGBox3D" parent="Geometry" unique_id=686018293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5514784, 0.4, 7.35)
+use_collision = true
+size = Vector3(0.12, 0.7, 0.12)
+
+[node name="TV Cabinet" type="CSGBox3D" parent="Geometry" unique_id=1063398192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.35, 4.3737226)
+use_collision = true
+size = Vector3(2.4, 0.7, 0.5)
+
+[node name="TV" type="CSGBox3D" parent="Geometry/TV Cabinet" unique_id=351547352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+size = Vector3(2, 1.2, 0.12)
+material = SubResource("StandardMaterial3D_gvrt1")
+
+[node name="Living Room Rug" type="CSGBox3D" parent="Geometry" unique_id=1474055389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.901, 0.02, 6.9325137)
+size = Vector3(3.5, 0.04, 2)
+material = SubResource("StandardMaterial3D_b8xij")
+
+[node name="Side Table" type="CSGBox3D" parent="Geometry" unique_id=177714581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.325, 8.505511)
+size = Vector3(0.6, 0.65, 0.6)
+
+[node name="Plant Pot" type="CSGCylinder3D" parent="Geometry/Side Table" unique_id=1028740681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+radius = 0.18
+height = 0.25
+
+[node name="Living Room Door Marker" type="Marker3D" parent="Geometry" unique_id=2050713980]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+
+[node name="Living Room Painting" type="CSGBox3D" parent="Geometry" unique_id=2008013736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.820074, 1.8, 6.599147)
+size = Vector3(0.08, 1, 1.4)
+material = SubResource("StandardMaterial3D_ktosd")
+
+[node name="Living Room Painting 2" type="CSGBox3D" parent="Geometry" unique_id=313424342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9491143, 2.127179, 8.840439)
+size = Vector3(3, 1, 0.08)
+material = SubResource("StandardMaterial3D_ukud8")
+
+[node name="Living Room Lamp" type="CSGBox3D" parent="Geometry" unique_id=649708896]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5646477, 0.04133737, 4.391971)
+size = Vector3(0.5, 0.08, 0.5)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Geometry/Living Room Lamp" unique_id=478592193]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83211756, 0)
+radius = 0.05
+height = 1.5
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Geometry/Living Room Lamp" unique_id=512259585]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8682482, 0)
+radius = 0.25
+height = 0.75
+
+[node name="Living Room Lamp Light" type="OmniLight3D" parent="Geometry/Living Room Lamp" unique_id=2114585593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09673357, 1.8951298, 0.016600132)
+light_color = Color(0.72156864, 0.76862746, 0.84705883, 1)
+light_energy = 1.5
+omni_range = 4.0
+
+[node name="Bedroom Rug" type="CSGBox3D" parent="Geometry" unique_id=1390791447]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.14204025, 0, -5.7218304)
+size = Vector3(2.4, 0.04, 3)
+material = SubResource("StandardMaterial3D_6by82")
+
+[node name="Front Door Frame" type="CSGBox3D" parent="Geometry" unique_id=499833684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.3, 8.9)
+visible = false
+size = Vector3(1.4, 2.6, 0.2)
+
+[node name="Front Door Pivot" type="Node3D" parent="Geometry" unique_id=2051286443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 9)
+script = ExtResource("2_6by82")
+
+[node name="Front Door" type="CSGBox3D" parent="Geometry/Front Door Pivot" unique_id=373825222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 1.1, -0.15)
+use_collision = true
+size = Vector3(1.1, 2.2, 0.12)
+material = SubResource("StandardMaterial3D_2he0n")
+
+[node name="Front Door Handle" type="CSGCylinder3D" parent="Geometry/Front Door Pivot/Front Door" unique_id=406239949]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.35, 0.15, -0.1)
+radius = 0.07
+height = 0.12
+material = SubResource("StandardMaterial3D_akgmd")
+
+[node name="Living Room Door Pivot" type="Node3D" parent="Geometry" unique_id=1232605266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5386259, 0, 4.1483817)
+script = ExtResource("2_6by82")
+
+[node name="Front Door" type="CSGBox3D" parent="Geometry/Living Room Door Pivot" unique_id=1965662319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4935779, 1.1, -0.25958633)
+use_collision = true
+size = Vector3(1.1, 2.2, 0.12)
+material = SubResource("StandardMaterial3D_2he0n")
+
+[node name="Front Door Handle" type="CSGCylinder3D" parent="Geometry/Living Room Door Pivot/Front Door" unique_id=843377398]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.35, 0.15, -0.1)
+radius = 0.07
+height = 0.12
+material = SubResource("StandardMaterial3D_akgmd")
+
+[node name="Front Door Opening" type="CSGBox3D" parent="Geometry" unique_id=1277722745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.2, 9.0481205)
+visible = false
+operation = 2
+size = Vector3(1.4, 2.4, 0.5)
+
+[node name="Apartment Number" type="CSGBox3D" parent="Geometry" unique_id=2050915494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.7, 8.875)
+size = Vector3(0.45, 0.35, 0.05)
+material = SubResource("StandardMaterial3D_cdc4j")
+
+[node name="Player" parent="." unique_id=1831374663 instance=ExtResource("1_pfxeq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6.5)
+
+[node name="Lights" type="Node3D" parent="." unique_id=896052651]
+
+[node name="Hallway Light 1" type="OmniLight3D" parent="Lights" unique_id=1732856325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, -2.5)
+visible = false
+light_color = Color(0.72156864, 0.76862746, 0.84705883, 1)
+light_energy = 1.5
+omni_range = 4.0
+
+[node name="Hallway Light 2" type="OmniLight3D" parent="Lights" unique_id=864249800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
+light_color = Color(0.72156864, 0.76862746, 0.84705883, 1)
+light_energy = 1.5
+omni_range = 4.0
+
+[node name="Hallway Light 3" type="OmniLight3D" parent="Lights" unique_id=866818713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 2.5)
+visible = false
+light_color = Color(0.72156864, 0.76862746, 0.84705883, 1)
+light_energy = 1.5
+omni_range = 4.0
+
+[node name="Living Room Light" type="OmniLight3D" parent="Lights" unique_id=339260801]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 2.7, 6.5)
+light_energy = 1.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1218145028]
+environment = SubResource("Environment_b8xij")
+
+[node name="Room Ambience" type="AudioStreamPlayer2D" parent="." unique_id=1223803977]
+stream = ExtResource("3_tfxtf")
+volume_db = -10.0
+autoplay = true
+
+[node name="Electrical Hum" type="AudioStreamPlayer" parent="." unique_id=416387656]
+stream = ExtResource("4_gvrt1")
+volume_db = -24.0
+autoplay = true
+
+[node name="Front Door Trigger" type="Area3D" parent="." unique_id=1731444382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8.75)
+script = ExtResource("6_c34uo")
+
+[node name="Trigger Shape" type="CollisionShape3D" parent="Front Door Trigger" unique_id=384336643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.29042244)
+shape = SubResource("BoxShape3D_b8xij")
+
+[node name="Bedroom Trigger" type="Area3D" parent="." unique_id=1789269783]
+script = ExtResource("7_23d8w")
+
+[node name="Bedroom Trigger Shape" type="CollisionShape3D" parent="Bedroom Trigger" unique_id=1957795150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4.8)
+shape = SubResource("BoxShape3D_ktosd")

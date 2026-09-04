@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://c8qijq6v3gw7s"]
+
+[ext_resource type="Script" uid="uid://b7nvrhxkgujk8" path="res://scripts/player/player.gd" id="1_oul6g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b8xij"]
+radius = 0.35
+height = 1.8
+
+[node name="Player" type="CharacterBody3D" unique_id=1831374663 groups=["player"]]
+script = ExtResource("1_oul6g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=271969459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_b8xij")
+
+[node name="Head" type="Node3D" parent="." unique_id=1541117569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=2099210771]
+
+[node name="InteractionRay" type="RayCast3D" parent="Head" unique_id=418828664]
+target_position = Vector3(0, 0, -2.5)
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Head" unique_id=514578686]
+
+[node name="Interaction UI" type="CanvasLayer" parent="." unique_id=20078065]
+
+[node name="Prompt Container" type="CenterContainer" parent="Interaction UI" unique_id=1605062438]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Interaction Prompt" type="Label" parent="Interaction UI/Prompt Container" unique_id=955532899]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "[E]  Open "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Objective UI" type="CanvasLayer" parent="." unique_id=925720452]
+
+[node name="Objective Text" type="Label" parent="Objective UI" unique_id=335173066]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 425.0
+offset_bottom = 106.0
+theme_override_font_sizes/font_size = 24
+text = "Objective:
+Go to the front door."
+
+[node name="Door Reached Text" type="Label" parent="Objective UI" unique_id=1225680180]
+visible = false
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 159.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 24
+text = "Objective:
+Open the front door.
+"
