@@ -58,6 +58,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 
 [node name="InteractionRay" type="RayCast3D" parent="Head" unique_id=418828664]
 target_position = Vector3(0, 0, -2.5)
+collision_mask = 3
+collide_with_areas = true
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Head" unique_id=514578686]
 

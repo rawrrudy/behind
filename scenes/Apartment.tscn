@@ -9,15 +9,17 @@
 [ext_resource type="AudioStream" uid="uid://cbsely0p871dn" path="res://assets/audio/room_ambience.mp3" id="3_tfxtf"]
 [ext_resource type="AudioStream" uid="uid://dco4mgrmyn75t" path="res://assets/audio/electrical_hum.mp3" id="4_gvrt1"]
 [ext_resource type="Texture2D" uid="uid://75pdg1sscsgg" path="res://assets/materials/mattress.jpg" id="4_kb4dp"]
+[ext_resource type="Script" uid="uid://llsr8lm76j1k" path="res://scenes/bed_interactable.gd" id="5_cwuug"]
 [ext_resource type="Script" uid="uid://cuy3itq1oq000" path="res://scripts/systems/front_door_trigger.gd" id="6_c34uo"]
 [ext_resource type="Texture2D" uid="uid://brfyve5aoksqi" path="res://assets/materials/sofa.png" id="6_kb4dp"]
 [ext_resource type="Script" uid="uid://celkqumhvwj37" path="res://scripts/systems/bedroom_trigger.gd" id="7_23d8w"]
 [ext_resource type="Texture2D" uid="uid://dvwj68pl7uyef" path="res://assets/materials/kitchen.jpg" id="8_jpx4l"]
-[ext_resource type="Script" uid="uid://cfw2w0tvt7yto" path="res://scenes/living_room_door_pivot.gd" id="8_liark"]
+[ext_resource type="Script" uid="uid://cfw2w0tvt7yto" path="res://scripts/objects/living_room_door_pivot.gd" id="8_liark"]
 [ext_resource type="Script" uid="uid://dg6pewo7w3rj6" path="res://scripts/objects/kitchen_door_pivot.gd" id="9_qd5op"]
 [ext_resource type="Texture2D" uid="uid://c1r0yok07c4u0" path="res://assets/materials/fridge.jpg" id="10_mmwvo"]
 [ext_resource type="AudioStream" uid="uid://dwrgf8fowr5y1" path="res://assets/audio/doorbell.mp3" id="16_tfcg1"]
 [ext_resource type="AudioStream" uid="uid://pbhxil3wk8xj" path="res://assets/audio/snoring.mp3" id="17_4isv1"]
+[ext_resource type="AudioStream" uid="uid://b1qa2ye2tkjd6" path="res://assets/audio/glassbreak.mp3" id="19_gpjpx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpx4l"]
 albedo_texture = ExtResource("3_7lhm0")
@@ -25,6 +27,9 @@ roughness = 0.85
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qd5op"]
 albedo_texture = ExtResource("4_kb4dp")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ukud8"]
+size = Vector3(2.538501, 2.1712158, 2.5985107)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lhm0"]
 albedo_texture = ExtResource("3_7lhm0")
@@ -217,6 +222,7 @@ material = ExtResource("1_2mva0")
 
 [node name="Hallway Ceiling" type="CSGBox3D" parent="Geometry" unique_id=1561802429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032446146, 3, -2.453949)
+visible = false
 use_collision = true
 size = Vector3(12.046338, 0.2, 13.122498)
 
@@ -266,6 +272,14 @@ material = SubResource("StandardMaterial3D_jpx4l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3758523, 0)
 size = Vector3(1.75, 0.3, 1.95)
 material = SubResource("StandardMaterial3D_qd5op")
+
+[node name="Bed Interactable" type="StaticBody3D" parent="Geometry/Bed" unique_id=1551845085]
+collision_layer = 2
+script = ExtResource("5_cwuug")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Bed/Bed Interactable" unique_id=1991802988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15213633, 0.62818605, 0.04925537)
+shape = SubResource("BoxShape3D_ukud8")
 
 [node name="Bedside Table" type="CSGBox3D" parent="Geometry" unique_id=857110143]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.35, -8.6)
@@ -672,7 +686,7 @@ shape = SubResource("BoxShape3D_b8xij")
 script = ExtResource("7_23d8w")
 
 [node name="Bedroom Trigger Shape" type="CollisionShape3D" parent="Bedroom Trigger" unique_id=1957795150]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6.3416634)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5.4879565)
 shape = SubResource("BoxShape3D_ktosd")
 
 [node name="Doorbell Sound" type="AudioStreamPlayer" parent="." unique_id=1800717629]
@@ -682,3 +696,6 @@ volume_db = -3.0
 [node name="Snoring Sound" type="AudioStreamPlayer" parent="." unique_id=2147033933]
 stream = ExtResource("17_4isv1")
 volume_db = -1.0
+
+[node name="Bang Sound" type="AudioStreamPlayer" parent="." unique_id=1889575498]
+stream = ExtResource("19_gpjpx")

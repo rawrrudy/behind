@@ -132,3 +132,17 @@ func _update_interaction_prompt():
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Wake Up":
 		can_move = true
+		
+func sleep_transition():
+	black_screen.visible = true
+	black_screen.modulate.a = 0.0
+	
+	var tween = create_tween()
+	tween.tween_property(
+		black_screen,
+		"modulate:a",
+		1.0,
+		1.5
+	)
+	
+	await tween.finished
