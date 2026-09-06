@@ -8,12 +8,31 @@ func interact():
 	player.can_move = false
 	await player.sleep_transition()
 	
+	var objective_ui = player.get_node("Objective UI")
+	var door_reached_text = objective_ui.get_node("Door Reached Text")
+	door_reached_text.visible = false
+	
 	var act_text = player.get_node("Wake Screen/Act Text")
 	act_text.text = "ACT: 2"
 	act_text.visible = true
 	
 	await get_tree().create_timer(3.0).timeout
 	act_text.visible = false
+	
+	var tv_static = get_tree().current_scene.get_node("Geometry/TV Cabinet/TV/TV Static")
+	var tv_static_sound = get_tree().current_scene.get_node("Geometry/TV Cabinet/TV/Static Sound")
+	
+	tv_static.visible = true
+	tv_static_sound.play()
+	
+	var objective_text = objective_ui.get_node("Objective Text")
+	objective_text.text = "Investigate the noise."
+	objective_text.visible = true
+	
+	await get_tree().create_timer(2.0).timeout
+	
+	player.black_screen.visible = false
+	player.animation_player.play("Wake Up")
 	
 func get_interaction_text() -> String:
 	return "[E] Sleep" 

@@ -13,9 +13,11 @@
 [ext_resource type="Script" uid="uid://cuy3itq1oq000" path="res://scripts/systems/front_door_trigger.gd" id="6_c34uo"]
 [ext_resource type="Texture2D" uid="uid://brfyve5aoksqi" path="res://assets/materials/sofa.png" id="6_kb4dp"]
 [ext_resource type="Script" uid="uid://celkqumhvwj37" path="res://scripts/systems/bedroom_trigger.gd" id="7_23d8w"]
+[ext_resource type="Shader" uid="uid://btx12myqqmd5t" path="res://scenes/tvstatic.gdshader" id="8_c1sa2"]
 [ext_resource type="Texture2D" uid="uid://dvwj68pl7uyef" path="res://assets/materials/kitchen.jpg" id="8_jpx4l"]
 [ext_resource type="Script" uid="uid://cfw2w0tvt7yto" path="res://scripts/objects/living_room_door_pivot.gd" id="8_liark"]
 [ext_resource type="Script" uid="uid://dg6pewo7w3rj6" path="res://scripts/objects/kitchen_door_pivot.gd" id="9_qd5op"]
+[ext_resource type="AudioStream" uid="uid://csx7e4o3sih83" path="res://assets/audio/staticaudio.mp3" id="9_qftdp"]
 [ext_resource type="Texture2D" uid="uid://c1r0yok07c4u0" path="res://assets/materials/fridge.jpg" id="10_mmwvo"]
 [ext_resource type="AudioStream" uid="uid://dwrgf8fowr5y1" path="res://assets/audio/doorbell.mp3" id="16_tfcg1"]
 [ext_resource type="AudioStream" uid="uid://pbhxil3wk8xj" path="res://assets/audio/snoring.mp3" id="17_4isv1"]
@@ -91,6 +93,13 @@ albedo_texture = ExtResource("3_7lhm0")
 albedo_color = Color(0.019607844, 0.019607844, 0.019607844, 1)
 metallic = 0.15
 roughness = 0.25
+
+[sub_resource type="QuadMesh" id="QuadMesh_b8xij"]
+size = Vector2(1.8, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktosd"]
+render_priority = 0
+shader = ExtResource("8_c1sa2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8xij"]
 albedo_color = Color(0.14117648, 0.14117648, 0.16470589, 1)
@@ -222,7 +231,6 @@ material = ExtResource("1_2mva0")
 
 [node name="Hallway Ceiling" type="CSGBox3D" parent="Geometry" unique_id=1561802429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032446146, 3, -2.453949)
-visible = false
 use_collision = true
 size = Vector3(12.046338, 0.2, 13.122498)
 
@@ -488,6 +496,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
 size = Vector3(2, 1.2, 0.12)
 material = SubResource("StandardMaterial3D_gvrt1")
 
+[node name="TV Static" type="MeshInstance3D" parent="Geometry/TV Cabinet/TV" unique_id=222242127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.06702566)
+visible = false
+mesh = SubResource("QuadMesh_b8xij")
+surface_material_override/0 = SubResource("ShaderMaterial_ktosd")
+
+[node name="Static Sound" type="AudioStreamPlayer3D" parent="Geometry/TV Cabinet/TV" unique_id=911102364]
+visible = false
+stream = ExtResource("9_qftdp")
+volume_db = -6.0
+parameters/looping = true
+
 [node name="Living Room Rug" type="CSGBox3D" parent="Geometry" unique_id=1474055389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.901, 0.02, 6.9325137)
 size = Vector3(3.5, 0.04, 2)
@@ -629,7 +649,7 @@ height = 0.12
 material = SubResource("StandardMaterial3D_ovxy4")
 
 [node name="Fridge" type="CSGBox3D" parent="Geometry" unique_id=513857597]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 1.5, 3.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 1.2110672, 3.3)
 use_collision = true
 size = Vector3(2, 2.5, 1)
 material = SubResource("StandardMaterial3D_ur5vc")
