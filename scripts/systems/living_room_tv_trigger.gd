@@ -20,6 +20,7 @@ func _on_body_entered(body):
 		return
 		
 	triggered = true
+	tv.arm_second_event()
 	
 	var tv_static = get_tree().current_scene.get_node(
 		"Geometry/TV Cabinet/TV/TV Static"

@@ -16,6 +16,7 @@
 [ext_resource type="Shader" uid="uid://btx12myqqmd5t" path="res://scripts/objects/tvstatic.gdshader" id="8_c1sa2"]
 [ext_resource type="Texture2D" uid="uid://dvwj68pl7uyef" path="res://assets/materials/kitchen.jpg" id="8_jpx4l"]
 [ext_resource type="Script" uid="uid://cfw2w0tvt7yto" path="res://scripts/objects/living_room_door_pivot.gd" id="8_liark"]
+[ext_resource type="Script" uid="uid://b4c17rbog5xvg" path="res://scripts/objects/tv_feed_screen.gd" id="9_luiu4"]
 [ext_resource type="Script" uid="uid://dg6pewo7w3rj6" path="res://scripts/objects/kitchen_door_pivot.gd" id="9_qd5op"]
 [ext_resource type="AudioStream" uid="uid://csx7e4o3sih83" path="res://assets/audio/staticaudio.mp3" id="9_qftdp"]
 [ext_resource type="Texture2D" uid="uid://c1r0yok07c4u0" path="res://assets/materials/fridge.jpg" id="10_mmwvo"]
@@ -103,8 +104,17 @@ size = Vector2(1.8, 1)
 render_priority = 0
 shader = ExtResource("8_c1sa2")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ofi7"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_2he0n"]
-size = Vector3(1.9505005, 2.0876465, 0.096582025)
+size = Vector3(1.9505005, 2.0876465, 0.3440674)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvam5"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_b8xij"]
+radius = 0.35
+height = 2.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8xij"]
 albedo_color = Color(0.14117648, 0.14117648, 0.16470589, 1)
@@ -508,9 +518,15 @@ material = SubResource("StandardMaterial3D_gvrt1")
 
 [node name="TV Static" type="MeshInstance3D" parent="Geometry/TV Cabinet/TV" unique_id=222242127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.06702566)
-visible = false
 mesh = SubResource("QuadMesh_b8xij")
 surface_material_override/0 = SubResource("ShaderMaterial_ktosd")
+
+[node name="TV Feed Screen" type="MeshInstance3D" parent="Geometry/TV Cabinet/TV" unique_id=1748265515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.06702566)
+visible = false
+mesh = SubResource("QuadMesh_b8xij")
+surface_material_override/0 = SubResource("StandardMaterial3D_1ofi7")
+script = ExtResource("9_luiu4")
 
 [node name="Static Sound" type="AudioStreamPlayer3D" parent="Geometry/TV Cabinet/TV" unique_id=911102364]
 visible = false
@@ -522,8 +538,22 @@ parameters/looping = true
 script = ExtResource("10_v5eem")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/TV Cabinet/TV/TV Interactable" unique_id=257482545]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0018615723, -0.26818848, 0.12196636)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0018615723, -0.26818848, 0.24570894)
 shape = SubResource("BoxShape3D_2he0n")
+
+[node name="TV Feed Viewport" type="SubViewport" parent="Geometry/TV Cabinet/TV" unique_id=828049858]
+render_target_update_mode = 4
+
+[node name="TV Feed Camera" type="Camera3D" parent="Geometry/TV Cabinet/TV/TV Feed Viewport" unique_id=1363569575]
+transform = Transform3D(-0.6354766, 0.22057909, -0.739942, 0.03371032, 0.9653374, 0.258819, 0.77138376, 0.13952978, -0.62088513, -5.967347, 2.6226244, -8.619194)
+current = true
+
+[node name="TV Entity" type="Node3D" parent="Geometry/TV Cabinet/TV/TV Feed Viewport" unique_id=1650614107]
+
+[node name="Entity Body" type="MeshInstance3D" parent="Geometry/TV Cabinet/TV/TV Feed Viewport/TV Entity" unique_id=313796582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9204242, 1.4973476, -6.8563085)
+material_override = SubResource("StandardMaterial3D_jvam5")
+mesh = SubResource("CapsuleMesh_b8xij")
 
 [node name="Living Room Rug" type="CSGBox3D" parent="Geometry" unique_id=1474055389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.901, 0.02, 6.9325137)
