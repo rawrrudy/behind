@@ -44,6 +44,6 @@ func _on_body_entered(body):
 	await get_tree().create_timer(0.7).timeout
 	objective_text.text = "..."
 	
-	await get_tree().create_timer(2.5).timeout
+	await get_tree().create_timer(1.5).timeout
 	objective_text.text = "Who turned it on again? Turn it Off."
 	objective_text.visible = true

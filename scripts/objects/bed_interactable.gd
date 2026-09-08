@@ -5,6 +5,21 @@ func interact():
 	if player == null:
 		return
 		
+	if player.act != 1:
+		return
+		
+	if not player.can_sleep:
+		var objective_ui =player.get_node("Objective UI")
+		var temporary_message = objective_ui.get_node("No Sleep Text")
+		
+		temporary_message.text = "You cannot sleep now."
+		temporary_message.visible = true
+		
+		await get_tree().create_timer(1.0).timeout
+		
+		temporary_message.visible = false
+		return
+		
 	player.can_move = false
 	await player.sleep_transition()
 	
@@ -13,6 +28,10 @@ func interact():
 	door_reached_text.visible = false
 	
 	var act_text = player.get_node("Wake Screen/Act Text")
+	
+	player.act = 2
+	player.can_sleep = false
+	
 	act_text.text = "ACT: 2"
 	act_text.visible = true
 	

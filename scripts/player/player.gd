@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 var can_move := false
 var door_opened := false
+var can_sleep := false
+var act := 1
 
 @export var speed := 3.5
 @export var mouse_sensitivity := 0.002

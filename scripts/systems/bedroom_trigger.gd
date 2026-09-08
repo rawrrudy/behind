@@ -20,6 +20,7 @@ func _on_body_entered(body):
 	
 	bedroom_sequence_started = true
 	bang_sound.play()
+	body.can_sleep = true
 
 	var objective_ui = body.get_node("Objective UI")
 	var door_reached_text = objective_ui.get_node("Door Reached Text")
