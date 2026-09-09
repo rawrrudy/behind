@@ -5,10 +5,7 @@ func interact():
 	if player == null:
 		return
 		
-	if player.act != 1:
-		return
-		
-	if not player.can_sleep:
+	if player.act != 1 or not player.can_sleep:
 		var objective_ui =player.get_node("Objective UI")
 		var temporary_message = objective_ui.get_node("No Sleep Text")
 		

@@ -4,6 +4,13 @@ var is_on := true
 var second_event_ready := false
 var feed_revealed := false
 
+func _ready():
+	var tv_static = get_parent().get_node("TV Static")
+	var tv_static_sound = get_parent().get_node("Static Sound")
+	
+	tv_static.visible = false
+	tv_static_sound.stop()
+
 
 func _process(_delta):
 	var players = get_tree().get_nodes_in_group("player")
@@ -11,8 +18,12 @@ func _process(_delta):
 		return
 
 	var player = players[0]
-	var ray = player.get_node("Head/InteractionRay")
+	
+	if player.act != 2:
+		return
 
+
+	var ray = player.get_node("Head/InteractionRay")
 
 	if second_event_ready and not feed_revealed:
 		if ray.is_colliding() and ray.get_collider() == self:
@@ -65,6 +76,10 @@ func reveal_feed(player):
 	tv_static_sound.stop()
 
 	tv_feed_screen.visible = true
+	
+	var tv_entity = get_parent().get_node("TV Feed Viewport/TV Entity")
+	
+	tv_entity.visible = true
 
 	var objective_ui = player.get_node("Objective UI")
 	var objective_text = objective_ui.get_node("Objective Text")
@@ -84,10 +99,19 @@ func reveal_feed(player):
 
 
 func get_interaction_text() -> String:
-
+	print("TV Check - Player act: ", get_tree().get_first_node_in_group("player").act)
+	
+	var player = get_tree().get_first_node_in_group("player")
+	
+	if player == null:
+		return ""
+		
+	if player.act != 2:
+		return ""
+		
 	if not second_event_ready and is_on and not feed_revealed:
 		return "[E] Turn off"
-
+		
 	return ""
 
 

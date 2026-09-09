@@ -125,10 +125,12 @@ func _update_interaction_prompt():
 		interactable = object.get_parent()
 		
 	if interactable:
-		prompt.visible = true
-		
 		if interactable.has_method("get_interaction_text"):
-			prompt.text = interactable.get_interaction_text()
+			var interaction_text = interactable.get_interaction_text()
+			
+			if interaction_text != "":
+				prompt.visible = true
+				prompt.text = interaction_text
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
