@@ -25,6 +25,8 @@
 [ext_resource type="AudioStream" uid="uid://pbhxil3wk8xj" path="res://assets/audio/snoring.mp3" id="17_4isv1"]
 [ext_resource type="AudioStream" uid="uid://b1qa2ye2tkjd6" path="res://assets/audio/glassbreak.mp3" id="19_gpjpx"]
 [ext_resource type="Script" uid="uid://y57pdqfrw7u4" path="res://scripts/systems/living_room_tv_trigger.gd" id="24_rcr47"]
+[ext_resource type="Script" uid="uid://dj3gyw8exr7gl" path="res://scripts/systems/kitchen_jumpscare_trigger.gd" id="26_raiyi"]
+[ext_resource type="AudioStream" uid="uid://cmo5cuwckis5i" path="res://assets/audio/jumpscare.mp3" id="27_nicvc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpx4l"]
 albedo_texture = ExtResource("3_7lhm0")
@@ -208,6 +210,9 @@ size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_akgmd"]
 size = Vector3(1.3450317, 3, 2.7537842)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cdc4j"]
+size = Vector3(1, 2.883667, 1.8377686)
 
 [node name="Apartment" type="Node2D" unique_id=1627622918]
 
@@ -827,3 +832,13 @@ script = ExtResource("24_rcr47")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Living Room TV Trigger" unique_id=1048147670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025177002, 0.9920707, 1.0623846)
 shape = SubResource("BoxShape3D_akgmd")
+
+[node name="Kitchen Jumpscare Trigger" type="Area3D" parent="." unique_id=168016637]
+script = ExtResource("26_raiyi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Kitchen Jumpscare Trigger" unique_id=577032567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3080897, 1.4192657, 2.7205658)
+shape = SubResource("BoxShape3D_cdc4j")
+
+[node name="Jumpscare Sound" type="AudioStreamPlayer" parent="." unique_id=1099180125]
+stream = ExtResource("27_nicvc")
