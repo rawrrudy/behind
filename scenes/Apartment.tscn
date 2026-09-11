@@ -760,6 +760,9 @@ use_collision = true
 size = Vector3(2, 2.5, 1)
 material = SubResource("StandardMaterial3D_ur5vc")
 
+[node name="Game Room Spawn" type="Marker3D" parent="Geometry" unique_id=1007920848]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.201978, 0, 0)
+
 [node name="Player" parent="." unique_id=1831374663 instance=ExtResource("1_pfxeq")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1, -6.5)
 
