@@ -27,6 +27,8 @@
 [ext_resource type="Script" uid="uid://y57pdqfrw7u4" path="res://scripts/systems/living_room_tv_trigger.gd" id="24_rcr47"]
 [ext_resource type="Script" uid="uid://dj3gyw8exr7gl" path="res://scripts/systems/kitchen_jumpscare_trigger.gd" id="26_raiyi"]
 [ext_resource type="AudioStream" uid="uid://cmo5cuwckis5i" path="res://assets/audio/jumpscare.mp3" id="27_nicvc"]
+[ext_resource type="PackedScene" uid="uid://8lht5521cqyc" path="res://assets/book_open.glb" id="28_d8d2j"]
+[ext_resource type="Script" uid="uid://bmstkgr02pdnn" path="res://scripts/objects/book_interactable.gd" id="29_1yce8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpx4l"]
 albedo_texture = ExtResource("3_7lhm0")
@@ -195,6 +197,9 @@ roughness = 0.25
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ur5vc"]
 albedo_texture = ExtResource("10_mmwvo")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvnvm"]
+albedo_texture = ExtResource("3_7lhm0")
+
 [sub_resource type="Environment" id="Environment_b8xij"]
 background_mode = 1
 background_color = Color(0.03137255, 0.039215688, 0.0627451, 1)
@@ -213,6 +218,9 @@ size = Vector3(1.3450317, 3, 2.7537842)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cdc4j"]
 size = Vector3(1, 2.883667, 1.8377686)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pvt6h"]
+size = Vector3(65.0553, 38.95459, 71.40393)
 
 [node name="Apartment" type="Node2D" unique_id=1627622918]
 
@@ -761,7 +769,12 @@ size = Vector3(2, 2.5, 1)
 material = SubResource("StandardMaterial3D_ur5vc")
 
 [node name="Game Room Spawn" type="Marker3D" parent="Geometry" unique_id=1007920848]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.201978, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.713969, 0, 0)
+
+[node name="Hidden Room Table" type="CSGBox3D" parent="Geometry" unique_id=429713780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.35, 0.5, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_kvnvm")
 
 [node name="Player" parent="." unique_id=1831374663 instance=ExtResource("1_pfxeq")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1, -6.5)
@@ -845,3 +858,13 @@ shape = SubResource("BoxShape3D_cdc4j")
 
 [node name="Jumpscare Sound" type="AudioStreamPlayer" parent="." unique_id=1099180125]
 stream = ExtResource("27_nicvc")
+
+[node name="Book" parent="." unique_id=977436333 instance=ExtResource("28_d8d2j")]
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, -5.2823954, 0.99157214, -0.035960793)
+
+[node name="Book Interactable" type="StaticBody3D" parent="Book" unique_id=1349583999]
+script = ExtResource("29_1yce8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Book/Book Interactable" unique_id=1520320290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1726685, 18.836678, 2.0715957)
+shape = SubResource("BoxShape3D_pvt6h")
