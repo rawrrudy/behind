@@ -44,6 +44,60 @@ _data = {
 &"Wake Up": SubResource("Animation_dovo2")
 }
 
+[sub_resource type="Animation" id="Animation_p47bc"]
+resource_name = "Book_Close"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Book Panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.85, 0.85)]
+}
+
+[sub_resource type="Animation" id="Animation_gmlin"]
+resource_name = "Book_Open"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Book Panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.85, 0.85), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lvxji"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Book Panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.85, 0.85)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p47bc"]
+_data = {
+&"Book_Close": SubResource("Animation_p47bc"),
+&"Book_Open": SubResource("Animation_gmlin"),
+&"RESET": SubResource("Animation_lvxji")
+}
+
 [node name="Player" type="CharacterBody3D" unique_id=1831374663 groups=["player"]]
 script = ExtResource("1_oul6g")
 
@@ -164,23 +218,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.009317499, 0.009317501, 0.009317499, 1)
+scale = Vector2(0.85, 0.85)
+pivot_offset = Vector2(576, 324)
+color = Color(1, 1, 1, 0)
 
-[node name="Book Title" type="Label" parent="Book UI/Book Panel" unique_id=632707753]
+[node name="Book Pages" type="ColorRect" parent="Book UI/Book Panel" unique_id=2063098581]
 layout_mode = 0
-offset_left = 251.0
-offset_top = 233.0
-offset_right = 947.0
-offset_bottom = 370.0
-theme_override_font_sizes/font_size = 100
+offset_left = 74.0
+offset_right = 1074.0
+offset_bottom = 650.0
+color = Color(0.54509807, 0, 0, 1)
+
+[node name="Left Page" type="ColorRect" parent="Book UI/Book Panel/Book Pages" unique_id=213960626]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 500.0
+offset_bottom = 640.0
+color = Color(0.84705883, 0.78431374, 0.65882355, 1)
+
+[node name="Book Title" type="Label" parent="Book UI/Book Panel/Book Pages/Left Page" unique_id=632707753]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 258.0
+offset_right = 420.0
+offset_bottom = 327.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
 text = "THE WAY OUT."
 
-[node name="Instructions" type="RichTextLabel" parent="Book UI/Book Panel" unique_id=334754431]
+[node name="Right Page" type="ColorRect" parent="Book UI/Book Panel/Book Pages" unique_id=570203310]
 layout_mode = 0
-offset_left = 150.0
-offset_top = 140.0
-offset_right = 1050.0
+offset_left = 500.0
+offset_top = 10.0
+offset_right = 990.0
 offset_bottom = 640.0
+color = Color(0.84705883, 0.78431374, 0.65882355, 1)
+
+[node name="Instructions" type="RichTextLabel" parent="Book UI/Book Panel/Book Pages/Right Page" unique_id=334754431]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 63.0
+offset_right = 495.0
+offset_bottom = 563.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 22
 text = "YOU WANT TO LEAVE?
 
@@ -192,6 +273,19 @@ Win all three games, you get to leave, at least, in one piece.
 
 Fail even ONE GAME, and prepare for the worst.
 
-Good luck."
+Good luck.
+
+Press [E] to close the book."
+
+[node name="Page Divider" type="ColorRect" parent="Book UI/Book Panel/Book Pages" unique_id=214677086]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 10.0
+offset_right = 510.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="Book Animation" type="AnimationPlayer" parent="Book UI" unique_id=1447456761]
+libraries/ = SubResource("AnimationLibrary_p47bc")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
