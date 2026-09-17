@@ -40,6 +40,10 @@ func _ready():
 
 
 func _unhandled_input(event):
+	if event.is_action_pressed("interact"):
+		_interact()
+		return
+	
 	if not can_move:
 		return
 		
