@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://ckx33k6undb2o"]
+
+[ext_resource type="Texture2D" uid="uid://chbc5t0weilwb" path="res://assets/images/browser.jpg" id="1_7j0n3"]
+[ext_resource type="VideoStream" uid="uid://bf5ghhvnjj158" path="res://assets/eerie_bg.ogv" id="2_jl8ve"]
+[ext_resource type="AudioStream" uid="uid://bolh7v343w1uh" path="res://assets/audio/bg-scream.mp3" id="3_jl8ve"]
+
+[node name="Game1" type="Node3D" unique_id=1315674859]
+
+[node name="Game UI" type="Control" parent="." unique_id=590532652]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Creepy Background" type="VideoStreamPlayer" parent="Game UI" unique_id=1778315620]
+layout_mode = 0
+offset_left = -70.0
+offset_top = -29.0
+offset_right = 1210.0
+offset_bottom = 691.0
+stream = ExtResource("2_jl8ve")
+autoplay = true
+loop = true
+
+[node name="Browser" type="TextureRect" parent="Game UI" unique_id=1832081217]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 51.0
+offset_right = 961.0
+offset_bottom = 592.0
+texture = ExtResource("1_7j0n3")
+
+[node name="Background Scream" type="AudioStreamPlayer" parent="Game UI" unique_id=1515168795]
+stream = ExtResource("3_jl8ve")
+autoplay = true
