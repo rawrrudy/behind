@@ -1,10 +1,16 @@
 [gd_scene format=3 uid="uid://ckx33k6undb2o"]
 
 [ext_resource type="Texture2D" uid="uid://chbc5t0weilwb" path="res://assets/images/browser.jpg" id="1_7j0n3"]
+[ext_resource type="Script" uid="uid://b1wavx1kkg34x" path="res://scripts/game_1.gd" id="1_j6wrb"]
 [ext_resource type="VideoStream" uid="uid://bf5ghhvnjj158" path="res://assets/eerie_bg.ogv" id="2_jl8ve"]
 [ext_resource type="AudioStream" uid="uid://bolh7v343w1uh" path="res://assets/audio/bg-scream.mp3" id="3_jl8ve"]
+[ext_resource type="Texture2D" uid="uid://6xsjdalceno8" path="res://assets/images/result1.png" id="4_tstf1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b8xij"]
+size = Vector2(120, 120)
 
 [node name="Game1" type="Node3D" unique_id=1315674859]
+script = ExtResource("1_j6wrb")
 
 [node name="Game UI" type="Control" parent="." unique_id=590532652]
 layout_mode = 3
@@ -35,3 +41,38 @@ texture = ExtResource("1_7j0n3")
 [node name="Background Scream" type="AudioStreamPlayer" parent="Game UI" unique_id=1515168795]
 stream = ExtResource("3_jl8ve")
 autoplay = true
+
+[node name="Game Area" type="Control" parent="Game UI" unique_id=2041726089]
+anchors_preset = 0
+offset_left = 187.0
+offset_top = 153.0
+offset_right = 929.0
+offset_bottom = 559.0
+
+[node name="Instructions" type="Label" parent="Game UI/Game Area" unique_id=314706622]
+layout_mode = 0
+offset_left = 194.0
+offset_top = -38.0
+offset_right = 585.0
+offset_bottom = -2.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "Match the given pattern correctly to survive."
+
+[node name="Pattern 1 Display" type="Sprite2D" parent="Game UI/Game Area" unique_id=11814905]
+position = Vector2(372, 203)
+scale = Vector2(0.438981, 0.438981)
+texture = ExtResource("4_tstf1")
+
+[node name="Shape Options" type="Control" parent="Game UI/Game Area" unique_id=943206781]
+anchors_preset = 0
+offset_left = 87.0
+offset_top = 33.0
+offset_right = 652.75665
+offset_bottom = 361.0
+
+[node name="Square" type="Area2D" parent="Game UI/Game Area/Shape Options" unique_id=1613277627]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game UI/Game Area/Shape Options/Square" unique_id=1964790989]
+position = Vector2(150, 150)
+shape = SubResource("RectangleShape2D_b8xij")
