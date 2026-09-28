@@ -6,6 +6,10 @@
 [ext_resource type="AudioStream" uid="uid://bolh7v343w1uh" path="res://assets/audio/bg-scream.mp3" id="3_jl8ve"]
 [ext_resource type="Texture2D" uid="uid://6xsjdalceno8" path="res://assets/images/result1.png" id="4_tstf1"]
 [ext_resource type="Texture2D" uid="uid://blu10ykomr7pp" path="res://assets/images/result2.png" id="6_ldo3y"]
+[ext_resource type="Texture2D" uid="uid://bmlib415imdki" path="res://assets/images/result3.png" id="7_1y8at"]
+[ext_resource type="Texture2D" uid="uid://dmhp33ah6gjs6" path="res://assets/materials/floor.svg" id="8_lujol"]
+[ext_resource type="Material" uid="uid://cm0ywc72yf3q1" path="res://assets/materials/WallMaterial.tres" id="9_x01ea"]
+[ext_resource type="PackedScene" uid="uid://c8qijq6v3gw7s" path="res://scenes/player/player.tscn" id="10_x01ea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8xij"]
 size = Vector2(105, 105)
@@ -18,6 +22,9 @@ radius = 55.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukud8"]
 size = Vector2(105, 105)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1y8at"]
+albedo_texture = ExtResource("8_lujol")
 
 [node name="Game1" type="Node3D" unique_id=1315674859]
 script = ExtResource("1_j6wrb")
@@ -89,6 +96,7 @@ shape = SubResource("RectangleShape2D_b8xij")
 
 [node name="Polygon2D" type="Polygon2D" parent="Game UI/Game Area/Shape Options/Square" unique_id=1247622944]
 position = Vector2(150, 150)
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
 
 [node name="Triangle" type="Area2D" parent="Game UI/Game Area/Shape Options" unique_id=655077408]
@@ -100,6 +108,7 @@ shape = SubResource("RectangleShape2D_ktosd")
 
 [node name="Polygon2D" type="Polygon2D" parent="Game UI/Game Area/Shape Options/Triangle" unique_id=372985885]
 position = Vector2(277, 147)
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-50, 50, 0, -50, 50, 50)
 
 [node name="Circle" type="Area2D" parent="Game UI/Game Area/Shape Options" unique_id=1490281565]
@@ -110,6 +119,7 @@ shape = SubResource("CircleShape2D_b8xij")
 
 [node name="Polygon2D" type="Polygon2D" parent="Game UI/Game Area/Shape Options/Circle" unique_id=1385810009]
 position = Vector2(405, 150)
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Pentagon" type="Area2D" parent="Game UI/Game Area/Shape Options" unique_id=336886509]
@@ -120,6 +130,7 @@ shape = SubResource("RectangleShape2D_ukud8")
 
 [node name="Polygon2D" type="Polygon2D" parent="Game UI/Game Area/Shape Options/Pentagon" unique_id=1344944428]
 position = Vector2(531, 150)
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, -55, 52, -17, 32, 45, -32, 45, -52, -17)
 
 [node name="Pattern 2 Display" type="Sprite2D" parent="Game UI/Game Area" unique_id=1118932202]
@@ -127,6 +138,56 @@ visible = false
 position = Vector2(368, 188)
 scale = Vector2(0.36670616, 0.3667062)
 texture = ExtResource("6_ldo3y")
+
+[node name="Pattern 3 Display" type="Sprite2D" parent="Game UI/Game Area" unique_id=2016313002]
+visible = false
+position = Vector2(366, 189.00002)
+scale = Vector2(0.24289094, 0.24289097)
+texture = ExtResource("7_1y8at")
+
+[node name="Game World" type="Node3D" parent="." unique_id=62850509]
+
+[node name="Floor" type="CSGBox3D" parent="Game World" unique_id=1832912751]
+use_collision = true
+size = Vector3(6, 0.2, 6)
+material = SubResource("StandardMaterial3D_1y8at")
+
+[node name="Ceiling" type="CSGBox3D" parent="Game World" unique_id=1242169959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
+use_collision = true
+size = Vector3(6, 0.2, 6)
+
+[node name="Wall 1" type="CSGBox3D" parent="Game World" unique_id=315148308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3)
+use_collision = true
+size = Vector3(6, 3, 0.2)
+material = ExtResource("9_x01ea")
+
+[node name="Wall 2" type="CSGBox3D" parent="Game World" unique_id=1666036017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
+use_collision = true
+size = Vector3(6, 3, 0.2)
+material = ExtResource("9_x01ea")
+
+[node name="Wall 3" type="CSGBox3D" parent="Game World" unique_id=1746177087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 0)
+use_collision = true
+size = Vector3(0.2, 3, 6)
+material = ExtResource("9_x01ea")
+
+[node name="Wall 4" type="CSGBox3D" parent="Game World" unique_id=527628311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, 0)
+use_collision = true
+size = Vector3(0.2, 3, 6)
+material = ExtResource("9_x01ea")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Game World" unique_id=1970371358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+light_energy = 0.7
+omni_range = 3.0
+
+[node name="Player" parent="Game World" unique_id=1831374663 instance=ExtResource("10_x01ea")]
 
 [connection signal="input_event" from="Game UI/Game Area/Shape Options/Square" to="." method="_on_square_input_event"]
 [connection signal="input_event" from="Game UI/Game Area/Shape Options/Triangle" to="." method="_on_triangle_input_event"]

@@ -6,8 +6,12 @@ var round := 1
 
 @onready var pattern_display = $"Game UI/Game Area/Pattern 1 Display"
 @onready var shape_options = $"Game UI/Game Area/Shape Options"
+@onready var pattern_display_2 = $"Game UI/Game Area/Pattern 2 Display"
+@onready var pattern_display_3 = $"Game UI/Game Area/Pattern 3 Display"
+@onready var instruction = $"Game UI/Game Area/Instructions"
 
 func _ready():
+	instruction.text = "Watch the pattern carefully."
 	shape_options.visible = false
 	
 	var circle_shape = $"Game UI/Game Area/Shape Options/Circle/Polygon2D"
@@ -17,6 +21,7 @@ func _ready():
 	
 	pattern_display.visible = false
 	shape_options.visible = true
+	instruction.text = "Match the pattern correctly."
 
 
 func _on_square_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
@@ -88,3 +93,33 @@ func _make_circle(polygon: Polygon2D, radius: float, points: int = 32):
 	
 func round_complete():
 	print("Round", round, "Complete")
+	
+	shape_options.visible = false
+	instruction.text = "Watch the pattern carefully."
+	
+	if round == 1:
+		round = 2
+		current_index = 0
+		
+		pattern_display_2.visible = true
+		
+		await get_tree().create_timer(4.0).timeout
+		
+		pattern_display_2.visible = false
+		shape_options.visible = true
+		instruction.text = "Match the pattern correctly."
+		
+	elif round == 2:
+		round = 3
+		current_index = 0
+		
+		pattern_display_3.visible = true
+		
+		await get_tree().create_timer(5.0).timeout
+		
+		pattern_display_3.visible = false
+		shape_options.visible = true
+		instruction.text = "Match the pattern correctly."
+		
+	elif round == 3:
+		print("Game 1 complete")
