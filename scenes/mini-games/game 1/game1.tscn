@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bmlib415imdki" path="res://assets/images/result3.png" id="7_1y8at"]
 [ext_resource type="Texture2D" uid="uid://dmhp33ah6gjs6" path="res://assets/materials/floor.svg" id="8_lujol"]
 [ext_resource type="Material" uid="uid://cm0ywc72yf3q1" path="res://assets/materials/WallMaterial.tres" id="9_x01ea"]
-[ext_resource type="PackedScene" uid="uid://c8qijq6v3gw7s" path="res://scenes/player/player.tscn" id="10_x01ea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b8xij"]
 size = Vector2(105, 105)
@@ -27,6 +26,7 @@ size = Vector2(105, 105)
 albedo_texture = ExtResource("8_lujol")
 
 [node name="Game1" type="Node3D" unique_id=1315674859]
+process_mode = 3
 script = ExtResource("1_j6wrb")
 
 [node name="Game UI" type="Control" parent="." unique_id=590532652]
@@ -154,7 +154,6 @@ material = SubResource("StandardMaterial3D_1y8at")
 
 [node name="Ceiling" type="CSGBox3D" parent="Game World" unique_id=1242169959]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-visible = false
 use_collision = true
 size = Vector3(6, 0.2, 6)
 
@@ -187,7 +186,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 light_energy = 0.7
 omni_range = 3.0
 
-[node name="Player" parent="Game World" unique_id=1831374663 instance=ExtResource("10_x01ea")]
+[node name="Game 1 Spawn" type="Marker3D" parent="Game World" unique_id=1206625336]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11321151, 0)
 
 [connection signal="input_event" from="Game UI/Game Area/Shape Options/Square" to="." method="_on_square_input_event"]
 [connection signal="input_event" from="Game UI/Game Area/Shape Options/Triangle" to="." method="_on_triangle_input_event"]

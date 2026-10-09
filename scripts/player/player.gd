@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+@export var game1_mode := false
+var transitioning_to_game1 := false
+
 var can_move := false
 var door_opened := false
 var can_sleep := false
@@ -19,6 +22,12 @@ const GRAVITY := 9.8
 
 
 func _ready():
+	if game1_mode:
+		can_move = true
+		act_text.visible = false
+		black_screen.visible = false 
+		return
+		
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	act_text.visible = true
@@ -121,6 +130,9 @@ func _update_interaction_prompt():
 		return 
 		
 	var object = ray.get_collider()
+	if object == null:
+		return
+		
 	var interactable = null
 	
 	if object.has_method("interact"):
