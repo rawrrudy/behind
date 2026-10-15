@@ -11,6 +11,9 @@ var round := 1
 @onready var instruction = $"Game UI/Game Area/Instructions"
 
 func _ready():
+	var transition_black = $"Minigame Transition/Transition Black"
+	transition_black.visible = false
+	
 	instruction.text = "Watch the pattern carefully."
 	shape_options.visible = false
 	

@@ -154,6 +154,7 @@ material = SubResource("StandardMaterial3D_1y8at")
 
 [node name="Ceiling" type="CSGBox3D" parent="Game World" unique_id=1242169959]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
 use_collision = true
 size = Vector3(6, 0.2, 6)
 
@@ -188,6 +189,17 @@ omni_range = 3.0
 
 [node name="Game 1 Spawn" type="Marker3D" parent="Game World" unique_id=1206625336]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11321151, 0)
+
+[node name="Minigame Transition" type="CanvasLayer" parent="." unique_id=389007213]
+layer = 100
+
+[node name="Transition Black" type="ColorRect" parent="Minigame Transition" unique_id=251409545]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="input_event" from="Game UI/Game Area/Shape Options/Square" to="." method="_on_square_input_event"]
 [connection signal="input_event" from="Game UI/Game Area/Shape Options/Triangle" to="." method="_on_triangle_input_event"]
